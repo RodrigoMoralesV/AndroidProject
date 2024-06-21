@@ -4,10 +4,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 // Screens
-import { Home } from '../../screens/Home'
-import { Albums } from '../../screens/Albums'
-import { Playlists } from '../../screens/Playlists'
-import { Artists } from '../../screens/Artists'
+import { Home } from '../../screens/HomeScreen'
+import { Albums } from '../../screens/AlbumsScreen'
+import { Playlists } from '../../screens/PlaylistsScreen'
+import { Artists } from '../../screens/ArtistsScreen'
 
 export const TabNavigator = () => {
   const Tab = createBottomTabNavigator()

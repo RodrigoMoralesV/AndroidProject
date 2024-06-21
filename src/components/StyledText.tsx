@@ -22,6 +22,6 @@ export const StyledText: React.FC<StyledTextProps> = (props) => {
   ]
 
   return (
-    <Text style={textStyle}>{props.children}</Text>
+    <Text numberOfLines={props.textOverflow} ellipsizeMode='tail' style={textStyle}>{props.children}</Text>
   )
 }

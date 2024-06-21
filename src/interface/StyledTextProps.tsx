@@ -13,4 +13,5 @@ export interface StyledTextProps {
   textLeft?: boolean
   textRight?: boolean
   textBold?: boolean
+  textOverflow?: number
 }

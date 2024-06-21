@@ -19,7 +19,7 @@ export const Album: React.FC<AlbumProps> = (props) => {
         style={styles.albumStyles}
       />
       <View style={styles.albumDetails}>
-        <StyledText textXL textBold>{albumTitle}</StyledText>
+        <StyledText textXL textOverflow={1} textBold>{albumTitle}</StyledText>
         <StyledText textM textGray>{albumYear}</StyledText>
       </View>
     </View >

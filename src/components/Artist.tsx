@@ -17,20 +17,21 @@ export const Artist: React.FC<ArtistProps> = (props) => {
         source={{ uri: artistPhoto }}
         style={styles.artistImage}
       />
-      <StyledText textBold textL>{artistName}</StyledText>
+      <StyledText textBold textXL>{artistName}</StyledText>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   artistImage: {
-    borderRadius: 50,
-    height: 100,
-    width: 100,
+    borderRadius: 100,
+    height: 150,
+    width: 150,
   },
   container: {
     alignItems: 'center',
     justifyContent: 'center',
     rowGap: 10,
+    marginVertical: 15,
   }
 })

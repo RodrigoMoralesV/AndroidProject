@@ -36,17 +36,6 @@ const songs = [
   }
 ]
 
-const artists = [
-  {
-    image: 'https://guiltygear.wiki.gg/images/8/88/ExtrasCover.jpg',
-    name: 'Elphelt'
-  },
-  {
-    image: 'https://static.wikia.nocookie.net/guilty-gear/images/d/df/Ggst_the_town_inside_me_cover.png/revision/latest/scale-to-width-down/1000?cb=20230917020623',
-    name: 'Bridget'
-  }
-]
-
 export const Home = () => {
   return (
     <ScrollView style={styles.background}>
