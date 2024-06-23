@@ -4,10 +4,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 // Screens
-import { Home } from '../../screens/HomeScreen'
-import { Albums } from '../../screens/AlbumsScreen'
-import { Playlists } from '../../screens/PlaylistsScreen'
-import { Artists } from '../../screens/ArtistsScreen'
+import { HomeScreen } from '../../screens/HomeScreen'
+import { AlbumsScreen } from '../../screens/AlbumsScreen'
+import { SearchScreen } from '../../screens/SearchScreen'
+import { PlaylistsScreen } from '../../screens/PlaylistsScreen'
+import { ArtistsScreen } from '../../screens/ArtistsScreen'
 
 export const TabNavigator = () => {
   const Tab = createBottomTabNavigator()
@@ -20,7 +21,7 @@ export const TabNavigator = () => {
     >
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ color, size }) => <Ionicons name='home' color={color} size={size} />
         }}
@@ -28,15 +29,23 @@ export const TabNavigator = () => {
 
       <Tab.Screen
         name="Albums"
-        component={Albums}
+        component={AlbumsScreen}
         options={{
           tabBarIcon: ({ color, size }) => <MaterialCommunity name='album' color={color} size={size} />
         }}
       />
 
       <Tab.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => <Ionicons name='search' color={color} size={size} />
+        }}
+      />
+
+      <Tab.Screen
         name="Playlists"
-        component={Playlists}
+        component={PlaylistsScreen}
         options={{
           tabBarIcon: ({ color, size }) => <MaterialCommunity name='playlist-music' color={color} size={size} />
         }}
@@ -44,7 +53,7 @@ export const TabNavigator = () => {
 
       <Tab.Screen
         name="Artists"
-        component={Artists}
+        component={ArtistsScreen}
         options={{
           tabBarIcon: ({ color, size }) => <MaterialCommunity name='account-music' color={color} size={size} />
         }}

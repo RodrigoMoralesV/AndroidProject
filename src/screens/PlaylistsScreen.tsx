@@ -1,8 +1,53 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
-export const Playlists = () => {
+import { colors } from '../config/theme/appTheme'
+import { Playlist } from '../components/Playlist'
+import { PlaylistGrid } from '../components/grids/PlaylistGrid'
+
+const playlists = [
+  {
+    image: [
+      'https://guiltygear.wiki.gg/images/8/88/ExtrasCover.jpg',
+      'https://pbs.twimg.com/media/GQxTbUXbkAAul_7?format=jpg&name=4096x4096'
+    ],
+    name: 'Playlists 1'
+  },
+  {
+    image: [
+      'https://guiltygear.wiki.gg/images/8/88/ExtrasCover.jpg',
+      'https://pbs.twimg.com/media/GQxTbUXbkAAul_7?format=jpg&name=4096x4096'
+    ],
+    name: 'Playlists 2'
+  },
+  {
+    image: [
+      'https://guiltygear.wiki.gg/images/8/88/ExtrasCover.jpg',
+      'https://pbs.twimg.com/media/GQxTbUXbkAAul_7?format=jpg&name=4096x4096'
+    ],
+    name: 'Playlists 3'
+  },
+]
+
+export const PlaylistsScreen = () => {
   return (
-    <Text>Playlists</Text>
+    <View style={styles.container}>
+      <PlaylistGrid
+        data={playlists}
+        RenderItem={(item) => (
+          <Playlist
+            playlistCovers={item.image}
+            playlistTitle={item.name}
+          />
+        )}
+      />
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.primary1,
+    flex: 1,
+  }
+})

@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
   },
   albumStyles: {
     borderRadius: 5,
-    height: 150,
-    width: 150,
+    height: 125,
+    width: 125,
   },
   container: {
     rowGap: 12,

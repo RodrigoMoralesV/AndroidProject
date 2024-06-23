@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
   },
   imageStyles: {
     borderRadius: 5,
-    height: 75,
-    width: 75,
+    height: 50,
+    width: 50,
   },
   songDetails: {
     flex: 1,

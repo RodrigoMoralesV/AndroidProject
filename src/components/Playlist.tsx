@@ -45,14 +45,14 @@ const styles = StyleSheet.create({
   playlistGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    width: 150,
-    height: 150,
+    width: 125,
+    height: 125,
   },
   playlistImage: {
-    width: 75,
-    height: 75,
+    width: 62.5,
+    height: 62.5,
   },
   playlistDetails: {
-    rowGap: 18,
+    rowGap: 20,
   },
 })

@@ -28,7 +28,7 @@ const artists = [
   }
 ]
 
-export const Artists = () => {
+export const ArtistsScreen = () => {
   return (
     <View style={styles.container}>
       <ArtistsGrid

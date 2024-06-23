@@ -28,7 +28,7 @@ const albums = [
   },
 ]
 
-export const Albums = () => {
+export const AlbumsScreen = () => {
   return (
     <View style={styles.container}>
       <AlbumGrid

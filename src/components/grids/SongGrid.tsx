@@ -13,18 +13,20 @@ export const SongGrid = <T extends any>(props: SongGridProps<T>) => {
 
   return (
     <View style={styles.container}>
-      <StyledText textXXL>Recently Listened</StyledText>
+      <View style={{ paddingBottom: 10 }}>
+        <StyledText textXXL>Recently Listened</StyledText>
+      </View>
       {data.map((item, index) => {
         return (
           <View
             key={index}
-            style={{ width: `80%`, padding: 5 }}
+            style={styles.items}
           >
             {RenderItem(item)}
           </View>
         )
       })}
-    </View>
+    </View >
   )
 }
 
@@ -33,5 +35,9 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'column',
     flexWrap: 'wrap',
+  },
+  items: {
+    padding: 5,
+    width: `100%`
   }
 })

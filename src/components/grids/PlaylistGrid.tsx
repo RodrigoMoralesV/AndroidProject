@@ -1,14 +1,12 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import { StyledText } from '../StyledText'
-
-interface ArtistsGridProps<T> {
+interface PlaylistGridProps<T> {
   data: T[]
   RenderItem(item: T): React.ReactNode
 }
 
-export const ArtistsGrid = <T extends any>(props: ArtistsGridProps<T>) => {
+export const PlaylistGrid = <T extends any>(props: PlaylistGridProps<T>) => {
   const { data, RenderItem } = props
 
   return (

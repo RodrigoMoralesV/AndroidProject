@@ -1,8 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import { StyledText } from '../StyledText'
-
 interface AlbumGridProps<T> {
   data: T[]
   RenderItem(item: T): React.ReactNode
@@ -17,7 +15,7 @@ export const AlbumGrid = <T extends any>(props: AlbumGridProps<T>) => {
         return (
           <View
             key={index}
-            style={{ padding: 8, width: `${100 / 2}%` }}
+            style={{ padding: 8 }}
           >
             {RenderItem(item)}
           </View>

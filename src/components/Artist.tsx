@@ -25,8 +25,8 @@ export const Artist: React.FC<ArtistProps> = (props) => {
 const styles = StyleSheet.create({
   artistImage: {
     borderRadius: 100,
-    height: 150,
-    width: 150,
+    height: 125,
+    width: 125,
   },
   container: {
     alignItems: 'center',
