@@ -2,7 +2,7 @@ import React from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
 
 import { ArtistsGrid } from '../grids/ArtistsGrid'
-import { StyledText } from '../StyledText'
+import { StyledText } from '../common/StyledText'
 
 interface ArtistListProps<T> {
   data: T[]
@@ -30,6 +30,6 @@ export const ArtistList = <T extends any>(props: ArtistListProps<T>) => {
 
 const styles = StyleSheet.create({
   container: {
-    rowGap: 5,
+    rowGap: 10,
   },
 })

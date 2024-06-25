@@ -1,7 +1,7 @@
 import React from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
 
-import { StyledText } from '../StyledText'
+import { StyledText } from '../common/StyledText'
 import { AlbumGrid } from '../grids/AlbumGrid'
 
 interface AlbumListProps<T> {
@@ -17,7 +17,6 @@ export const AlbumList = <T extends any>(props: AlbumListProps<T>) => {
       <StyledText textXL>Albums for you</StyledText>
       <ScrollView
         horizontal={true}
-        contentContainerStyle={styles.albumList}
         showsHorizontalScrollIndicator={false}
       >
         <AlbumGrid
@@ -31,9 +30,6 @@ export const AlbumList = <T extends any>(props: AlbumListProps<T>) => {
 
 const styles = StyleSheet.create({
   container: {
-    rowGap: 12,
-  },
-  albumList: {
-    columnGap: 35,
+    rowGap: 10,
   }
 })

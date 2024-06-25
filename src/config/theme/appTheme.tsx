@@ -28,7 +28,7 @@ export const fontSizes = {
 export const styledFallBack = StyleSheet.create({
   text: {
     fontSize: fontSizes.textL,
-    color: textColors.textWhite
+    color: textColors.textWhite,
   }
 })
 

@@ -1,115 +1,61 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
 
+// Para el color del fondo
 import { colors } from '../config/theme/appTheme'
-import { ContainerMain } from '../components/ContainerMain'
-import { Song } from '../components/Song'
-import { SongGrid } from '../components/grids/SongGrid'
+
+// Componentes a usar
+import { Album } from '../components/common/Album'
 import { AlbumList } from '../components/lists/AlbumList'
-import { Album } from '../components/Album'
-import { PlaylistList } from '../components/lists/PlaylistList'
-import { Playlist } from '../components/Playlist'
+import { Artist } from '../components/common/Artist'
 import { ArtistList } from '../components/lists/ArtistList'
-import { Artist } from '../components/Artist'
+import { ContainerMain } from '../components/common/ContainerMain'
+import { Playlist } from '../components/common/Playlist'
+import { PlaylistList } from '../components/lists/PlaylistList'
+import { Song } from '../components/common/Song'
+import { SongGrid } from '../components/grids/SongGrid'
 
-const songs = [
-  {
-    image: 'https://guiltygear.wiki.gg/images/8/88/ExtrasCover.jpg',
-    name: 'Extras',
-    artist: 'Arc System Works',
-    length: '5:38',
-  },
-  {
-    image: 'https://static.wikia.nocookie.net/guilty-gear/images/d/df/Ggst_the_town_inside_me_cover.png/revision/latest/scale-to-width-down/1000?cb=20230917020623',
-    name: 'The Town Inside Me',
-    artist: 'Arc System Works',
-    length: '4:18',
-  },
-  {
-    image: 'https://static.wikia.nocookie.net/guilty-gear/images/d/df/Ggst_the_town_inside_me_cover.png/revision/latest/scale-to-width-down/1000?cb=20230917020623',
-    name: 'The Town Inside Me',
-    artist: 'Arc System Works',
-    length: '4:18',
-  },
-  {
-    image: 'https://static.wikia.nocookie.net/guilty-gear/images/d/df/Ggst_the_town_inside_me_cover.png/revision/latest/scale-to-width-down/1000?cb=20230917020623',
-    name: 'The Town Inside Me',
-    artist: 'Arc System Works',
-    length: '4:18',
-  }
-]
+// Funciones para buscar datos en la api, retorna una lista
+import { SearchAlbum } from '../api/albums/SearchAlbum'
+import { SearchArtists } from '../api/artists/SearchArtists'
+import { SearchPlaylist } from '../api/playlists/SearchPlaylist'
+import { SearchSong } from '../api/songs/SearchSong'
 
-const albums = [
-  {
-    image: 'https://guiltygear.wiki.gg/images/8/88/ExtrasCover.jpg',
-    name: 'Extras',
-    year: '2023'
-  },
-  {
-    image: 'https://static.wikia.nocookie.net/guilty-gear/images/d/df/Ggst_the_town_inside_me_cover.png/revision/latest/scale-to-width-down/1000?cb=20230917020623',
-    name: 'The Town Inside Me',
-    year: '2023'
-  },
-  {
-    image: 'https://guiltygear.wiki.gg/images/8/88/ExtrasCover.jpg',
-    name: 'Extras',
-    year: '2023'
-  },
-  {
-    image: 'https://static.wikia.nocookie.net/guilty-gear/images/d/df/Ggst_the_town_inside_me_cover.png/revision/latest/scale-to-width-down/1000?cb=20230917020623',
-    name: 'The Town Inside Me',
-    year: '2023'
-  },
-]
-
-const playlists = [
-  {
-    image: [
-      'https://guiltygear.wiki.gg/images/8/88/ExtrasCover.jpg',
-      'https://pbs.twimg.com/media/GQxTbUXbkAAul_7?format=jpg&name=4096x4096'
-    ],
-    name: 'Playlists 1'
-  },
-  {
-    image: [
-      'https://guiltygear.wiki.gg/images/8/88/ExtrasCover.jpg',
-      'https://pbs.twimg.com/media/GQxTbUXbkAAul_7?format=jpg&name=4096x4096'
-    ],
-    name: 'Playlists 2'
-  },
-  {
-    image: [
-      'https://guiltygear.wiki.gg/images/8/88/ExtrasCover.jpg',
-      'https://pbs.twimg.com/media/GQxTbUXbkAAul_7?format=jpg&name=4096x4096'
-    ],
-    name: 'Playlists 3'
-  },
-]
-
-const artists = [
-  {
-    image: 'https://guiltygear.wiki.gg/images/8/88/ExtrasCover.jpg',
-    name: 'Elphelt'
-  },
-  {
-    image: 'https://static.wikia.nocookie.net/guilty-gear/images/d/df/Ggst_the_town_inside_me_cover.png/revision/latest/scale-to-width-down/1000?cb=20230917020623',
-    name: 'Bridget'
-  },
-  {
-    image: 'https://static.wikia.nocookie.net/guilty-gear/images/d/df/Ggst_the_town_inside_me_cover.png/revision/latest/scale-to-width-down/1000?cb=20230917020623',
-    name: 'Bridget'
-  },
-  {
-    image: 'https://static.wikia.nocookie.net/guilty-gear/images/d/df/Ggst_the_town_inside_me_cover.png/revision/latest/scale-to-width-down/1000?cb=20230917020623',
-    name: 'Bridget'
-  },
-  {
-    image: 'https://static.wikia.nocookie.net/guilty-gear/images/d/df/Ggst_the_town_inside_me_cover.png/revision/latest/scale-to-width-down/1000?cb=20230917020623',
-    name: 'Bridget'
-  }
-]
+// Tipado de los datos de la api
+import { AlbumType, ArtistType, PlaylistType, SongType } from '../types'
 
 export const HomeScreen = () => {
+  const [songs, setSongs] = useState<SongType[]>([])
+  const [albums, setAlbums] = useState<AlbumType[]>([])
+  const [artists, setArtists] = useState<ArtistType[]>([])
+  const [playlists, setPlaylists] = useState<PlaylistType[]>([])
+
+  useEffect(() => {
+    const getSongs = async () => {
+      const resultsSongs = await SearchSong("Burn My Dread")
+      setSongs(resultsSongs as SongType[])
+    }
+    getSongs()
+
+    const getAlbums = async () => {
+      const resultsAlbums = await SearchAlbum("Persona")
+      setAlbums(resultsAlbums as AlbumType[])
+    }
+    getAlbums()
+
+    const getArtists = async () => {
+      const resultsArtists = await SearchArtists("Queen")
+      setArtists(resultsArtists as ArtistType[])
+    }
+    getArtists()
+
+    const getPlaylists = async () => {
+      const resultsPlaylists = await SearchPlaylist("canciones que usa Adrelina")
+      setPlaylists(resultsPlaylists as PlaylistType[])
+    }
+    getPlaylists()
+  }, [])
+
   return (
     <ScrollView style={styles.background}>
       <ContainerMain>
@@ -118,9 +64,9 @@ export const HomeScreen = () => {
             data={songs}
             RenderItem={(item) => (
               <Song
-                songArtist={item.artist}
-                songCover={item.image}
-                songLength={item.length}
+                songArtist={item.artist.name}
+                songCover={item.thumbnails[0].url}
+                songLength={item.duration?.toString() || 'N/A'}
                 songName={item.name}
               />
             )}
@@ -129,7 +75,7 @@ export const HomeScreen = () => {
             data={albums}
             RenderItem={(item) => (
               <Album
-                albumCover={item.image}
+                albumCover={item.thumbnails[0].url}
                 albumTitle={item.name}
                 albumYear={item.year}
               />
@@ -140,7 +86,7 @@ export const HomeScreen = () => {
             RenderItem={(item) => (
               <Artist
                 artistName={item.name}
-                artistPhoto={item.image}
+                artistPhoto={item.thumbnails[0].url}
               />
             )}
           />
@@ -148,7 +94,7 @@ export const HomeScreen = () => {
             data={playlists}
             RenderItem={(item) => (
               <Playlist
-                playlistCovers={item.image}
+                playlistCovers={item.thumbnails[0].url}
                 playlistTitle={item.name}
               />
             )}

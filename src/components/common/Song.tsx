@@ -10,6 +10,13 @@ interface SongProps {
   songName?: string
 }
 
+// Funcion para formatear la duracion de la cancion en minutos:segundos
+const formatTime = (seconds: any) => {
+  const minutes = Math.floor(seconds / 60)
+  const remainingSeconds = seconds % 60
+  return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`
+}
+
 export const Song: React.FC<SongProps> = (props) => {
   const { songArtist, songCover, songName, songLength } = props
 
@@ -18,14 +25,13 @@ export const Song: React.FC<SongProps> = (props) => {
       <Image
         source={{ uri: songCover }}
         style={styles.imageStyles}
+        resizeMode='cover'
       />
       <View style={styles.songDetails}>
-        <View>
-          <StyledText textWhite textBold textL>{songName}</StyledText>
-        </View>
+        <StyledText textWhite textBold textL>{songName}</StyledText>
         <View style={styles.songDetailsBottom}>
           <StyledText textGray textBold textM>{songArtist}</StyledText>
-          <StyledText textGray textS>{songLength}</StyledText>
+          <StyledText textGray textS>{formatTime(songLength)}</StyledText>
         </View>
       </View>
     </View>
@@ -38,6 +44,7 @@ const styles = StyleSheet.create({
     columnGap: 15,
     flexDirection: 'row',
     marginVertical: 10,
+    overflow: 'visible',
   },
   imageStyles: {
     borderRadius: 5,

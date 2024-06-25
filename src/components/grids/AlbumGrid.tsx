@@ -30,5 +30,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '100%',
+    rowGap: 20,
+    columnGap: 30,
   }
 })

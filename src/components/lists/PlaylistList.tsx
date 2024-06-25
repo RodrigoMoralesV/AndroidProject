@@ -1,7 +1,7 @@
 import React from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
 
-import { StyledText } from '../StyledText'
+import { StyledText } from '../common/StyledText'
 import { PlaylistGrid } from '../grids/PlaylistGrid'
 
 interface PlaylistListProps<T> {

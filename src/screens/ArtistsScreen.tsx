@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import { Artist } from '../components/Artist'
+import { Artist } from '../components/common/Artist'
 import { colors } from '../config/theme/appTheme'
 import { ArtistsGrid } from '../components/grids/ArtistsGrid'
 
@@ -31,15 +31,17 @@ const artists = [
 export const ArtistsScreen = () => {
   return (
     <View style={styles.container}>
-      <ArtistsGrid
-        data={artists}
-        RenderItem={(item) => (
-          <Artist
-            artistName={item.name}
-            artistPhoto={item.image}
-          />
-        )}
-      />
+      <View>
+        <ArtistsGrid
+          data={artists}
+          RenderItem={(item) => (
+            <Artist
+              artistName={item.name}
+              artistPhoto={item.image}
+            />
+          )}
+        />
+      </View>
     </View>
   )
 }
@@ -48,5 +50,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.primary1,
     flex: 1,
-  }
+    alignItems: 'center',
+  },
 })

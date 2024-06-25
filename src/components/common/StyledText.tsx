@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text } from 'react-native'
-import { styledFallBack, styledFontSizes, styledTextColors, styledTextJustified, styledFontWeight } from '../config/theme/appTheme'
-import { StyledTextProps } from '../interface/StyledTextProps'
+import { styledFallBack, styledFontSizes, styledTextColors, styledTextJustified, styledFontWeight } from '../../config/theme/appTheme'
+import { StyledTextProps } from '../../interface/StyledTextProps'
 
 export const StyledText: React.FC<StyledTextProps> = (props) => {
   const textStyle: any = [
@@ -22,6 +22,12 @@ export const StyledText: React.FC<StyledTextProps> = (props) => {
   ]
 
   return (
-    <Text numberOfLines={props.textOverflow} ellipsizeMode='tail' style={textStyle}>{props.children}</Text>
+    <Text
+      numberOfLines={props.numberOfLines}
+      ellipsizeMode={props.ellipsizeMode || 'tail'}
+      style={textStyle}
+    >
+      {props.children}
+    </Text>
   )
 }

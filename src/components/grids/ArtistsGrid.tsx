@@ -1,8 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import { StyledText } from '../StyledText'
-
 interface ArtistsGridProps<T> {
   data: T[]
   RenderItem(item: T): React.ReactNode

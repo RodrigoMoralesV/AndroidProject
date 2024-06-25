@@ -17,7 +17,9 @@ export const Artist: React.FC<ArtistProps> = (props) => {
         source={{ uri: artistPhoto }}
         style={styles.artistImage}
       />
-      <StyledText textBold textXL>{artistName}</StyledText>
+      <View>
+        <StyledText textBold textXL ellipsizeMode='tail' numberOfLines={1}>{artistName}</StyledText>
+      </View>
     </View>
   )
 }
@@ -32,6 +34,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     rowGap: 10,
-    marginVertical: 15,
+    marginHorizontal: 5,
   }
 })

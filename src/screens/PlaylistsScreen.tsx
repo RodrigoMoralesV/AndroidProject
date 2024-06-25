@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
 import { colors } from '../config/theme/appTheme'
-import { Playlist } from '../components/Playlist'
+import { Playlist } from '../components/common/Playlist'
 import { PlaylistGrid } from '../components/grids/PlaylistGrid'
 
 const playlists = [
@@ -32,15 +32,17 @@ const playlists = [
 export const PlaylistsScreen = () => {
   return (
     <View style={styles.container}>
-      <PlaylistGrid
-        data={playlists}
-        RenderItem={(item) => (
-          <Playlist
-            playlistCovers={item.image}
-            playlistTitle={item.name}
-          />
-        )}
-      />
+      <View>
+        <PlaylistGrid
+          data={playlists}
+          RenderItem={(item) => (
+            <Playlist
+              playlistCovers={item.image}
+              playlistTitle={item.name}
+            />
+          )}
+        />
+      </View>
     </View>
   )
 }
@@ -49,5 +51,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.primary1,
     flex: 1,
+    alignItems: 'center'
   }
 })

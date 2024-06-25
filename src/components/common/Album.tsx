@@ -1,12 +1,12 @@
 import React from 'react'
+import { Image, StyleSheet, View } from 'react-native'
 
 import { StyledText } from './StyledText'
-import { Image, StyleSheet, View } from 'react-native'
 
 interface AlbumProps {
   albumCover?: string
   albumTitle?: string
-  albumYear?: string
+  albumYear?: number | null
 }
 
 export const Album: React.FC<AlbumProps> = (props) => {
@@ -19,7 +19,7 @@ export const Album: React.FC<AlbumProps> = (props) => {
         style={styles.albumStyles}
       />
       <View style={styles.albumDetails}>
-        <StyledText textXL textOverflow={1} textBold>{albumTitle}</StyledText>
+        <StyledText textXL textBold ellipsizeMode='tail' numberOfLines={1} >{albumTitle}</StyledText>
         <StyledText textM textGray>{albumYear}</StyledText>
       </View>
     </View >
@@ -28,7 +28,8 @@ export const Album: React.FC<AlbumProps> = (props) => {
 
 const styles = StyleSheet.create({
   albumDetails: {
-    rowGap: 18,
+    rowGap: 10,
+    maxWidth: '70%',
   },
   albumStyles: {
     borderRadius: 5,
@@ -36,6 +37,7 @@ const styles = StyleSheet.create({
     width: 125,
   },
   container: {
-    rowGap: 12,
+    marginHorizontal: 5,
+    rowGap: 10,
   }
 })

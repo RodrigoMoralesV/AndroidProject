@@ -14,4 +14,6 @@ export interface StyledTextProps {
   textRight?: boolean
   textBold?: boolean
   textOverflow?: number
+  numberOfLines?: number
+  ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip'
 }

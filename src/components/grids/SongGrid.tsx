@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import { StyledText } from '../StyledText'
+import { StyledText } from '../common/StyledText'
 
 interface SongGridProps<T> {
   data: T[]
