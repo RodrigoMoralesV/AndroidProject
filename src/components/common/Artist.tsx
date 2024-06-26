@@ -1,18 +1,19 @@
 import React from 'react'
-import { Image, StyleSheet, View } from 'react-native'
+import { Image, Pressable, StyleSheet, View } from 'react-native'
 
 import { StyledText } from './StyledText'
 
 interface ArtistProps {
   artistName: string
   artistPhoto: string
+  onPress?: () => void
 }
 
 export const Artist: React.FC<ArtistProps> = (props) => {
-  const { artistName, artistPhoto } = props
+  const { artistName, artistPhoto, onPress } = props
 
   return (
-    <View style={styles.container}>
+    <Pressable onPress={onPress} style={styles.container}>
       <Image
         source={{ uri: artistPhoto }}
         style={styles.artistImage}
@@ -20,7 +21,7 @@ export const Artist: React.FC<ArtistProps> = (props) => {
       <View>
         <StyledText textBold textXL ellipsizeMode='tail' numberOfLines={1}>{artistName}</StyledText>
       </View>
-    </View>
+    </Pressable>
   )
 }
 

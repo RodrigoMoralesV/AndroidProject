@@ -1,48 +1,41 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { ScrollView, StyleSheet, View } from 'react-native'
 
-import { Artist } from '../components/common/Artist'
+import { Album } from '../components/common/Album'
+import { AlbumGrid } from '../components/grids/AlbumGrid'
 import { colors } from '../config/theme/appTheme'
-import { ArtistsGrid } from '../components/grids/ArtistsGrid'
 
-const artists = [
-  {
-    image: 'https://guiltygear.wiki.gg/images/8/88/ExtrasCover.jpg',
-    name: 'Elphelt'
-  },
-  {
-    image: 'https://static.wikia.nocookie.net/guilty-gear/images/d/df/Ggst_the_town_inside_me_cover.png/revision/latest/scale-to-width-down/1000?cb=20230917020623',
-    name: 'Bridget'
-  },
-  {
-    image: 'https://static.wikia.nocookie.net/guilty-gear/images/d/df/Ggst_the_town_inside_me_cover.png/revision/latest/scale-to-width-down/1000?cb=20230917020623',
-    name: 'Bridget'
-  },
-  {
-    image: 'https://static.wikia.nocookie.net/guilty-gear/images/d/df/Ggst_the_town_inside_me_cover.png/revision/latest/scale-to-width-down/1000?cb=20230917020623',
-    name: 'Bridget'
-  },
-  {
-    image: 'https://static.wikia.nocookie.net/guilty-gear/images/d/df/Ggst_the_town_inside_me_cover.png/revision/latest/scale-to-width-down/1000?cb=20230917020623',
-    name: 'Bridget'
-  }
-]
+// Tipado de la api
+import { ArtistType } from '../types'
+
+// Datos de la api
+import { SearchArtists } from '../api/artists/SearchArtists'
 
 export const ArtistsScreen = () => {
+  const [artists, setArtists] = useState<ArtistType[]>([])
+
+  useEffect(() => {
+    const getArtists = async () => {
+      const resultsAlbums = await SearchArtists("Queen")
+      setArtists(resultsAlbums as ArtistType[])
+    }
+    getArtists()
+  })
+
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <View>
-        <ArtistsGrid
+        <AlbumGrid
           data={artists}
           RenderItem={(item) => (
-            <Artist
-              artistName={item.name}
-              artistPhoto={item.image}
+            <Album
+              albumCover={item.thumbnails[0].url}
+              albumTitle={item.name}
             />
           )}
         />
       </View>
-    </View>
+    </ScrollView>
   )
 }
 

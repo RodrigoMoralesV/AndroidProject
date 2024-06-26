@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
+import { NativeStackScreenProps } from 'react-native-screens/lib/typescript/native-stack/types'
 
 // Para el color del fondo
 import { colors } from '../config/theme/appTheme'
@@ -16,6 +17,7 @@ import { Song } from '../components/common/Song'
 import { SongGrid } from '../components/grids/SongGrid'
 
 // Funciones para buscar datos en la api, retorna una lista
+// Esto debe ir en la vista de 'Search' por ahora se queda aqui para mostrar datos de relleno
 import { SearchAlbum } from '../api/albums/SearchAlbum'
 import { SearchArtists } from '../api/artists/SearchArtists'
 import { SearchPlaylist } from '../api/playlists/SearchPlaylist'
@@ -24,12 +26,20 @@ import { SearchSong } from '../api/songs/SearchSong'
 // Tipado de los datos de la api
 import { AlbumType, ArtistType, PlaylistType, SongType } from '../types'
 
-export const HomeScreen = () => {
+// Tipado de la navegacion
+import { StackParamList } from '../types'
+
+type HomeScreenProps = NativeStackScreenProps<StackParamList, 'Home'>
+
+export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
+  const { navigation } = props
+
   const [songs, setSongs] = useState<SongType[]>([])
   const [albums, setAlbums] = useState<AlbumType[]>([])
   const [artists, setArtists] = useState<ArtistType[]>([])
   const [playlists, setPlaylists] = useState<PlaylistType[]>([])
 
+  // Arreglar la resolucion de las miniaturas de las canciones / albums / artistas, ya que se ven todas pixeleadas
   useEffect(() => {
     const getSongs = async () => {
       const resultsSongs = await SearchSong("Burn My Dread")
@@ -38,7 +48,7 @@ export const HomeScreen = () => {
     getSongs()
 
     const getAlbums = async () => {
-      const resultsAlbums = await SearchAlbum("Persona")
+      const resultsAlbums = await SearchAlbum("The 1975")
       setAlbums(resultsAlbums as AlbumType[])
     }
     getAlbums()
@@ -49,8 +59,9 @@ export const HomeScreen = () => {
     }
     getArtists()
 
+    // No trae datos
     const getPlaylists = async () => {
-      const resultsPlaylists = await SearchPlaylist("canciones que usa Adrelina")
+      const resultsPlaylists = await SearchPlaylist("Canciones que usa Adrelina Esperanza para robarle a todos sus amigos")
       setPlaylists(resultsPlaylists as PlaylistType[])
     }
     getPlaylists()
@@ -71,6 +82,7 @@ export const HomeScreen = () => {
               />
             )}
           />
+          {/* Por algun motivo el componente que se renderiza ocupa todo el espacio del texto sin importar que el texto haya sido formateado, aplica tambien para la parte de artistas (no se si lo dije bien)*/}
           <AlbumList
             data={albums}
             RenderItem={(item) => (
@@ -78,6 +90,7 @@ export const HomeScreen = () => {
                 albumCover={item.thumbnails[0].url}
                 albumTitle={item.name}
                 albumYear={item.year}
+                onPress={() => navigation.navigate('AlbumDetails', { albumId: item.albumId })}
               />
             )}
           />
@@ -87,6 +100,7 @@ export const HomeScreen = () => {
               <Artist
                 artistName={item.name}
                 artistPhoto={item.thumbnails[0].url}
+                onPress={() => navigation.navigate('ArtistDetails', { artistId: item.artistId })}
               />
             )}
           />

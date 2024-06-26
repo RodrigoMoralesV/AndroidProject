@@ -4,11 +4,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 // Screens
-import { HomeScreen } from '../../screens/HomeScreen'
-import { AlbumsScreen } from '../../screens/AlbumsScreen'
-import { SearchScreen } from '../../screens/SearchScreen'
+import { HomeStack } from '../StackNavigation/StackNavigator'
+import { AlbumStack } from '../StackNavigation/StackNavigator'
+import { ArtistStack } from '../StackNavigation/StackNavigator'
 import { PlaylistsScreen } from '../../screens/PlaylistsScreen'
-import { ArtistsScreen } from '../../screens/ArtistsScreen'
+import { SearchScreen } from '../../screens/SearchScreen'
+import { colors } from '../../config/theme/appTheme'
 
 export const TabNavigator = () => {
   const Tab = createBottomTabNavigator()
@@ -16,12 +17,14 @@ export const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false
+        headerShown: false,
+        tabBarActiveBackgroundColor: colors.primary1,
+        tabBarInactiveBackgroundColor: colors.primary1
       }}
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarIcon: ({ color, size }) => <Ionicons name='home' color={color} size={size} />
         }}
@@ -29,7 +32,7 @@ export const TabNavigator = () => {
 
       <Tab.Screen
         name="Albums"
-        component={AlbumsScreen}
+        component={AlbumStack}
         options={{
           tabBarIcon: ({ color, size }) => <MaterialCommunity name='album' color={color} size={size} />
         }}
@@ -53,7 +56,7 @@ export const TabNavigator = () => {
 
       <Tab.Screen
         name="Artists"
-        component={ArtistsScreen}
+        component={ArtistStack}
         options={{
           tabBarIcon: ({ color, size }) => <MaterialCommunity name='account-music' color={color} size={size} />
         }}

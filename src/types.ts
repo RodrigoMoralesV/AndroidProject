@@ -64,3 +64,13 @@ export type PlaylistType = {
         height: number
     }[]
 }
+
+// Este tipo es de la navegacion por Stack
+
+export type StackParamList = {
+  Home: undefined
+  Albums: undefined
+  AlbumDetails: { albumId: string }
+  Artists: undefined
+  ArtistDetails: { artistId: string }
+}
